@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeAlyze - AI Code Authenticator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-6 flex flex-col items-center justify-center gap-6">
+
+  <h1 class="text-3xl font-bold">🧠 CodeAlyze – AI Code Authenticator</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
+    
+    <!-- 📥 Input Section -->
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+      <label class="block mb-2 text-lg">🔼 Upload Code File:</label>
+      <input type="file" id="codeFile" class="text-black bg-white p-2 rounded w-full mb-4" />
+      <button onclick="uploadFile()" class="bg-blue-600 w-full py-2 rounded hover:bg-blue-700 mb-6">Analyze File</button>
+
+      <label class="block mb-2 text-lg">✍️ Or Paste Code Below:</label>
+      <textarea id="codeText" rows="10" class="w-full p-2 text-black rounded resize-none" placeholder="Paste your code here..."></textarea>
+      <button onclick="analyzeText()" class="bg-green-600 w-full py-2 mt-4 rounded hover:bg-green-700">Analyze Pasted Code</button>
+    </div>
+
+    <!-- 📊 Result Display Section -->
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col items-center justify-center">
+      <canvas id="aiChart" width="200" height="200" class="mb-4"></canvas>
+      <h2 id="percentText" class="text-2xl font-bold">AI Usage: --%</h2>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
