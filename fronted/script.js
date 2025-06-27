@@ -98,34 +98,3 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
         alert("Error connecting to backend. Please try again.");
     }
 });
-
-document.body.innerHTML += `
-  <form id="dynamicUploadForm" class="mb-6">
-    <input type="file" id="dynamicFile" name="file" required class="text-black bg-white p-2 rounded w-full mb-2" />
-    <button type="submit" class="bg-blue-600 w-full py-2 rounded hover:bg-blue-700">Analyze (Dynamic)</button>
-  </form>
-  <div id="dynamicResult" class="mb-6"></div>
-`;
-
-document.getElementById("dynamicUploadForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const formData = new FormData();
-    const fileInput = document.getElementById("dynamicFile");
-    const file = fileInput.files[0];
-    formData.append("file", file);
-    try {
-        const response = await fetch("https://ai-code-authenticator.onrender.com/analyze", {
-            method: "POST",
-            body: formData
-        });
-        const data = await response.json();
-        document.getElementById("dynamicResult").innerHTML = `
-            <h3>✅ AI Detection Result (Dynamic)</h3>
-            <p><strong>AI Usage:</strong> ${data.ai_percentage}%</p>
-            <p><strong>Comment:</strong> ${data.comment}</p>
-        `;
-    } catch (err) {
-        console.error("Error:", err);
-        alert("Error connecting to backend. Please try again.");
-    }
-});
