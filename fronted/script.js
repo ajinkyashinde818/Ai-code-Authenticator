@@ -69,3 +69,32 @@ function showResult(aiPercent) {
     }
   });
 }
+
+document.getElementById("uploadForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const fileInput = document.getElementById("file");
+    const file = fileInput.files[0];
+    formData.append("file", file);
+
+    try {
+        const response = await fetch("https://ai-code-authenticator.onrender.com/analyze", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        // Display result
+        document.getElementById("result").innerHTML = `
+            <h3>✅ AI Detection Result</h3>
+            <p><strong>AI Usage:</strong> ${data.ai_percentage}%</p>
+            <p><strong>Comment:</strong> ${data.comment}</p>
+        `;
+
+    } catch (err) {
+        console.error("Error:", err);
+        alert("Error connecting to backend. Please try again.");
+    }
+});
